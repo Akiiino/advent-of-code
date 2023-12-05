@@ -1,6 +1,6 @@
 # AoC
-data/tokens.txt
-data/2022/
+data/
+!data/tokens.txt.example
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

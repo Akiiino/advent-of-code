@@ -12,7 +12,7 @@ HEADERS = {"User-Agent": "My AOC parser v1.0", "From": "aoc@akiiino.me"}
 INPUT_URL = "https://adventofcode.com/{}/day/{}/input"
 
 
-def get_input(day, year=2022):
+def get_input(day, year=2023):
     input_path = data_path / str(year) / str(day) / "input[0].in"
 
     try:
@@ -31,7 +31,7 @@ def get_input(day, year=2022):
     return data.rstrip()
 
 
-def check_answer(answer, day, level, year=2022):
+def check_answer(answer, day, level, year=2023):
     answer_path = data_path / str(year) / str(day) / f"input[0].out.{level}"
     answer = str(answer)
 
@@ -51,7 +51,7 @@ def check_answer(answer, day, level, year=2022):
     
 
 def submit(answer, day, level):
-    url = f"https://adventofcode.com/2022/day/{day}/answer"
+    url = f"https://adventofcode.com/2023/day/{day}/answer"
     answer = str(answer)
 
     resp = requests.post(
@@ -65,7 +65,7 @@ def submit(answer, day, level):
         return True
 
     elif "You don't seem to be solving the right level" in resp.text:
-        url = f"https://adventofcode.com/2022/day/{day}"
+        url = f"https://adventofcode.com/2023/day/{day}"
         resp = requests.get(url, cookies={"session": COOKIE}, headers=HEADERS)
         correct_answer = re.findall(
             r"Your puzzle answer was <code>(.*?)</code>", resp.text
@@ -82,4 +82,4 @@ def submit(answer, day, level):
         time.sleep(waiting_time + 5)
         return submit(answer, day, level)
     else:
-        raise NotImplementedError("Unexpected response")
+        raise NotImplementedError(f"Unexpected response {resp.text}")
